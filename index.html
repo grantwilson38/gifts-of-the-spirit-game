@@ -114,7 +114,7 @@
         <p class="text-lg text-gray-600 mb-4">You can choose one of the following rewards:</p>
         <div class="flex flex-col sm:flex-row justify-center gap-4">
             <button id="choose-dice-button" onclick="chooseDiceRoll()" class="flex-1 bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-full shadow-xl transition duration-150 ease-in-out text-lg">
-                <span class="mr-2">🔥</span> Score Multiplier (1-3 pts)
+                <span class="mr-2">🔥</span> Score Multiplier (1-3x)
             </button>
             <button id="choose-helper-button" onclick="chooseHelperGift()" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-full shadow-xl transition duration-150 ease-in-out text-lg">
                 <span class="mr-2">🛡️</span> Helper Gift (-1 wrong answer)
@@ -508,15 +508,15 @@
         diceIcon.classList.add('dice-spin');
         diceResultText.textContent = "Rolling...";
 
-        const rollTime = 1000; 
+        const rollTime = 2000; 
         
         setTimeout(() => {
             diceIcon.classList.remove('dice-spin');
             
             const multiplier = Math.floor(Math.random() * 3) + 1;
             
-            const pointsGained = 1 * multiplier;
-            score += pointsGained;
+            const pointsGained = score * multiplier;
+            score = pointsGained;
             scoreText.textContent = score;
 
             let diceEmoji = '🎲';
@@ -525,7 +525,7 @@
             else if (multiplier === 3) diceEmoji = '3️⃣';
 
             diceIcon.textContent = diceEmoji;
-            diceResultText.innerHTML = `You rolled a **x${multiplier} multiplier**! You gained **${pointsGained} point${pointsGained !== 1 ? 's' : ''}**!`;
+            diceResultText.innerHTML = `You rolled a ${multiplier}! Your score was multiplied by ${multiplier}!`;
             diceResultText.classList.add('text-green-700', 'font-extrabold');
 
             nextButton.classList.remove('hidden');
@@ -569,7 +569,7 @@
             
             if (helperGiftStack > 0) {
                 const plural = helperGiftStack > 1 ? 's' : '';
-                feedbackText.textContent += ` Your **${helperGiftStack} Helper Gift${plural}** was consumed to aid your judgment!`;
+                feedbackText.textContent += ` Your ${helperGiftStack} Helper Gift${plural} was consumed to aid your judgment!`;
                 helperGiftStack = 0; 
             }
             
