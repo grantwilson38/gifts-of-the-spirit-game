@@ -159,54 +159,88 @@
 
     const SCENARIOS = [
         {
-            scenario: "You are asked to speak in front of the whole school about your faith, and even though you are nervous, you agree because you know it's right.",
+            scenario: "You are asked to speak in front of your class about your faith, and even though you are nervous, you do it because you know it's right.",
             gift: "Fortitude",
-            justification: "Fortitude (Courage) gives you the strength and resolve to stand up for your faith and moral truth, even when it is difficult or frightening."
+            justification: "Fortitude helps us do what's right, to avoid sin, and to witness to others even when it's hard."
         },
         {
-            scenario: "You look up at the night sky full of stars or see a massive waterfall and are completely stunned by how amazing and powerful God is.",
-            gift: "Fear of the Lord",
-            justification: "Fear of the Lord (Wonder and Awe) is a sense of profound respect and humble wonder at God's goodness and power, which moves us to avoid offending Him."
-        },
-        {
-            scenario: "A friend is struggling with whether to cheat on a test. You clearly explain why cheating is wrong and suggest they talk to the teacher instead.",
-            gift: "Counsel",
-            justification: "Counsel (Right Judgment) helps you to quickly and correctly judge what is right and wrong in a situation, enabling you to make and give good, moral decisions."
-        },
-        {
-            scenario: "Your parents tell you that money is tight, so you happily choose to donate your birthday money to the poor instead of buying a new video game.",
-            gift: "Knowledge",
-            justification: "Knowledge helps you see the true value of created things in relation to God. It allows you to prioritize spiritual and eternal good (charity) over temporary, material pleasures."
-        },
-        {
-            scenario: "You are reading a complicated Bible verse about the Eucharist, and suddenly, you have a deep, spiritual realization of what Jesus meant.",
+            scenario: "You had a bad day. Your friends left you out of a game, and your parents didn't hang out with you, but you still know that God loves you.",
             gift: "Understanding",
-            justification: "Understanding allows you to comprehend the deeper truths of our faith (like Scripture or Sacraments), going beyond surface-level facts to grasp the divine meaning."
+            justification: "Understanding allows us to know how much God loves us and that he's always working in our lives."
         },
         {
-            scenario: "You treat the altar in the church with deep respect and always say a prayer before receiving the Eucharist, recognizing Christ's presence.",
+            scenario: "For you, it's not just an obligation. You love to worship God every Sunday at Mass.",
             gift: "Piety",
-            justification: "Piety (Reverence) gives you deep, loving respect and loyalty for God, His holy objects (like the altar), and all people as children of God."
+            justification: "Piety means worshipping and serving God as our Father and one another as brothers and sisters."
         },
         {
-            scenario: "You have a disagreement with a friend, and instead of just yelling, you pause and ask yourself, 'How would Jesus want me to handle this?'",
+            scenario: "You learn that the Church teaches that Baptism wipes away all sin, and you just know that it's true.",
+            gift: "Knowledge",
+            justification: "Knowledge helps us know that what the Church tells us is true and helps us act based on what we believe."
+
+        },
+        {
+            scenario: "Your friends care more about making money than about God, prayer, or church, but you know that their lifestyle is ultimately empty.",
             gift: "Wisdom",
-            justification: "Wisdom helps you see things, people, and situations with God's eyes. It directs your judgments and actions toward what is most important and purposeful in light of eternity."
+            justification: "Wisdom helps us love God above all else and keep everything else below him."
+
         },
         {
-            scenario: "You are tempted to skip Sunday Mass to go to a fun event, but you choose the Mass because you know your soul needs God's grace more than anything.",
-            gift: "Wisdom",
-            justification: "Wisdom helps you discern and judge that your spiritual life and relationship with God are the most valuable things, making the correct choice based on divine truth."
+            scenario: "You are about to tell a lie to avoid punishment, but you stop out of a deep horror of offending God, whom you love.",
+            gift: "Fear of the Lord",
+            justification: "Fear of the Lord is reverence or loving respect for God, which makes us want to obey him and avoid sin."
+
         },
         {
-            scenario: "A person on the street asks you for directions, and you realize they seem lost and confused. You take the time to compassionately walk them part of the way to ensure they get there safely.",
-            gift: "Understanding",
-            justification: "Understanding helps you feel compassionate awareness of what others are experiencing, enabling you to respond with deep empathy and charity."
-        },
-        {
-            scenario: "You witness a school bully picking on a student who has difficulty speaking. You firmly step in and tell the bully to stop, even though they are much bigger than you.",
+            scenario: "When a classmate makes a cruel joke about another student, you speak up against it, even though the group might turn on you next.",
             gift: "Fortitude",
-            justification: "Fortitude (Courage) is the virtue that gives you the spiritual strength to overcome fear and stand up for justice and the vulnerable, fulfilling your duty to God and neighbor."
+            justification: "Fortitude helps us do what's right, to avoid sin, and to witness to others even when it's hard."
+
+        },
+        {
+            scenario: "You find a wallet on the ground, but you don't take anything from it because you'd hate to sin against God.",
+            gift: "Fear of the Lord",
+            justification: "Fear of the Lord is reverence or loving respect for God, which makes us want to obey him and avoid sin."
+        },
+        {
+            scenario: "A friend is planning to secretly use Chat-GPT to write an essay. You explain why that would be wrong in this case.",
+            gift: "Counsel",
+            justification: "Counsel shows us the right thing to do and the right way to do it in specific situations."
+        },
+        {
+            scenario: "You learn that the Church teaches that there are 7 sacraments, and it clicks. You know it's true.",
+            gift: "Knowledge",
+            justification: "Knowledge helps us know that what the Church tells us is true and helps us act based on what we believe."
+        },
+        {
+            scenario: "Every time you hear a story about Jesus, you feel how much God loves us and know that he's always with you.",
+            gift: "Understanding",
+            justification: "Understanding allows us to know how much God loves us and that he's always working in our lives."
+        },
+        {
+            scenario: "Someone asks if you'd like to serve at Mass. You sign up because you love serving God and others.",
+            gift: "Piety",
+            justification: "Piety means worshipping and serving God as our Father and one another as brothers and sisters."
+        },
+        {
+            scenario: "Your friends skip Sunday Mass when they have sports going on, but you never skip because you know God is more important than anything else.",
+            gift: "Wisdom",
+            justification: "Wisdom helps us love God above all else and keep everything else below him."
+        },
+        {
+            scenario: "You are tempted to watch YouTube all evening, but you make time for some prayer because you know you need God's grace more than anything.",
+            gift: "Wisdom",
+            justification: "Wisdom helps us love God above all else and keep everything else below him."
+        },
+        {
+            scenario: "Your friend is excited about their drawing, but it's not good at all. They show it to you and ask what you think. You praise their effort, then offer constructive suggestions.",
+            gift: "Counsel",
+            justification: "Counsel shows us the right thing to do and the right way to do it in specific situations."
+        },
+        {
+            scenario: "You witness a school bully picking on a student who has difficulty speaking. You step in and tell the bully to stop, even though they're bigger than you.",
+            gift: "Fortitude",
+            justification: "Fortitude helps us do what's right, to avoid sin, and to witness to others even when it's hard."
         }
     ].sort(() => Math.random() - 0.5); // Shuffle scenarios
 
@@ -551,7 +585,7 @@
     function endGame() {
         const finalScore = score;
         scenarioText.textContent = "Game Over!";
-        feedbackText.textContent = `You finished the quiz! Your final score is ${finalScore} out of 30 possible points!`;
+        feedbackText.textContent = `You finished the quiz! Your final score is ${finalScore}!`;
         feedbackText.className = 'text-center text-2xl font-extrabold mb-4 text-red-700';
         justificationText.classList.add('hidden');
         
