@@ -100,31 +100,30 @@
         
     <div class="text-center mb-6">
         <button id="sacrifice-button" onclick="sacrificePointsForHelp()" class="bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-2 px-6 rounded-full shadow-lg transition duration-150 ease-in-out text-base hidden disabled:opacity-50 disabled:cursor-not-allowed">
-            <span class="mr-1">💰 -2 Pts</span> | Remove 1 Wrong Option
+            <span class="mr-1">💰 -Half Your Score</span> | Remove 3 Wrong Options
         </button>
     </div>
     <div id="feedback-container" class="min-h-[100px]">
         <p id="feedback-text" class="text-center text-xl font-bold mb-4"></p>
-        <div id="justification-text" class="p-4 bg-yellow-50 rounded-lg text-gray-700 text-sm italic hidden">
+        <div id="justification-text" class="p-4 bg-yellow-50 rounded-lg text-gray-900 text-lg italic hidden">
             </div>
     </div>
     
     <div id="choice-section" class="text-center mt-6 p-4 bg-orange-100 rounded-lg border border-orange-200 hidden">
         <p class="text-xl font-bold text-orange-700 mb-3">Choose your reward!</p>
-        <p class="text-lg text-gray-600 mb-4">You can choose one of the following rewards:</p>
         <div class="flex flex-col sm:flex-row justify-center gap-4">
             <button id="choose-dice-button" onclick="chooseDiceRoll()" class="flex-1 bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-full shadow-xl transition duration-150 ease-in-out text-lg">
                 <span class="mr-2">🔥</span> Score Multiplier (1-3x)
             </button>
             <button id="choose-helper-button" onclick="chooseHelperGift()" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-full shadow-xl transition duration-150 ease-in-out text-lg">
-                <span class="mr-2">🛡️</span> Helper Gift (-1 wrong answer)
+                <span class="mr-2">🛡️</span> Shield (-1 wrong answer)
             </button>
         </div>
     </div>
     
     <div id="dice-roll-section" class="text-center mt-6 p-4 bg-orange-100 rounded-lg border border-orange-200 hidden">
         <p class="text-xl font-bold text-orange-700 mb-3">Rolling for Score!</p>
-        <p id="dice-result-text" class="text-2xl font-semibold mb-4 min-h-[30px]">Roll the dice for a score multiplier!</p>
+        <p id="dice-result-text" class="text-2xl font-semibold mb-4 min-h-[30px]">Multiply your score by 1-3x!</p>
         <button id="roll-dice-button" onclick="rollDice()" class="bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 px-8 rounded-full shadow-xl transition duration-150 ease-in-out text-lg flex items-center justify-center mx-auto">
             <span id="dice-icon" class="mr-2">🎲</span> Roll Dice
         </button>
@@ -399,7 +398,7 @@
 
         // Reset Dice Roll State for the new question
         rollDiceButton.disabled = false;
-        diceResultText.textContent = "Roll the dice for a score multiplier!";
+        diceResultText.textContent = "Multiply your score 1-3x!";
         diceResultText.classList.remove('text-green-700', 'font-extrabold');
         diceIcon.textContent = '🎲';
 
@@ -413,11 +412,11 @@
             sacrificeButton.disabled = true;
         }
 
-        // APPLY STACKING HELPER GIFT LOGIC (Does NOT reset stack here)
+        // APPLY STACKING SHIELD LOGIC (Does NOT reset stack here)
         if (helperGiftStack > 0) {
             applyHelperGift(helperGiftStack); // Use helper stack
             const plural = helperGiftStack > 1 ? 's' : '';
-            feedbackText.textContent = `🛡️ Your Helper Gift is active! ${helperGiftStack} wrong answer${plural} have been removed.`;
+            feedbackText.textContent = `🛡️ Your Shield is active! ${helperGiftStack} wrong answer${plural} have been removed.`;
             feedbackText.className = 'text-center text-xl font-bold mb-4 text-blue-600';
         }
 
@@ -468,12 +467,12 @@
             return;
         }
 
-        score -= 2;
+        score = Math.round (score / 2);
         scoreText.textContent = score;
 
-        applyHelperGift(1);
+        applyHelperGift(3);
 
-        feedbackText.textContent = "💰 Sacrificed 2 points! One wrong option has been removed.";
+        feedbackText.textContent = "💰 Sacrificed half your score! Three wrong options have been removed.";
         feedbackText.className = 'text-center text-xl font-bold mb-4 text-yellow-700';
         
         sacrificeButton.disabled = true;
@@ -495,7 +494,7 @@
         helperGiftStack++; 
         choiceSection.classList.add('hidden');
         const plural = helperGiftStack > 1 ? 's' : '';
-        feedbackText.textContent = `🛡️ Helper Gift chosen! You now have ${helperGiftStack} stacked gift${plural} active.`;
+        feedbackText.textContent = `🛡️ Shield chosen! You now have ${helperGiftStack} active.`;
         feedbackText.className = 'text-center text-xl font-bold mb-4 text-blue-600';
         
         nextButton.classList.remove('hidden'); 
@@ -553,7 +552,7 @@
             score += 1;
             scoreText.textContent = score;
 
-            feedbackText.textContent = "Correct! The Spirit is prompting you well. Choose your reward!";
+            feedbackText.textContent = "Correct! The Spirit is prompting you well.";
             feedbackText.className = 'text-center text-xl font-bold mb-4 text-green-600';
             selectedButton.classList.add('correct-answer');
             sparkFire();
@@ -562,15 +561,18 @@
             
         } else {
             correctOnLastQuestion = false;
+            score -= 1;
+            scoreText.textContent = score;
+            
             feedbackText.textContent = `Incorrect. You chose ${selectedGift}.`;
             feedbackText.className = 'text-center text-xl font-bold mb-4 text-red-600';
             selectedButton.classList.add('wrong-answer');
             correctButton.classList.add('correct-answer');
             
             if (helperGiftStack > 0) {
+                helperGiftStack --;
                 const plural = helperGiftStack > 1 ? 's' : '';
-                feedbackText.textContent += ` Your ${helperGiftStack} Helper Gift${plural} was consumed to aid your judgment!`;
-                helperGiftStack = 0; 
+                feedbackText.textContent += ` You lost 1 Shield!`;
             }
             
             nextButton.classList.remove('hidden');
@@ -594,8 +596,7 @@
         giftButtonsContainer.classList.add('flex', 'justify-center', 'w-full');
         
         giftButtonsContainer.innerHTML = `
-            <p class="text-center text-xl p-4 bg-gray-100 rounded-lg max-w-md">Pray to the Holy Spirit to increase these gifts in your life!</p>
-        `;
+            <p class="text-center text-xl p-4 bg-gray-100 rounded-lg max-w-md">Pray to the Holy Spirit to increase these gifts in your life!</p>`;
 
         restartButton.classList.remove('hidden');
         nextButton.classList.add('hidden');
